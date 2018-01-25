@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Modal } from 'antd'
+import { Table, Modal,Popover } from 'antd'
 import classnames from 'classnames'
 import { DropOption } from 'components'
 import { Link } from 'react-router-dom'
@@ -56,7 +56,7 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
       dataIndex: 'domain',
       key: 'url',
       width: 60,
-      render: (text) => <Link to={`http://${text}/vod.xhtml`}  target="_blank">查看</Link>,
+      render: (text,record) => <Popover placement="right" content={<img src={record.imgdata} />} ><Link to={`http://${text}/vod.xhtml`}  target="_blank">查看</Link></Popover>,
     }, {
       title: '配置',
       key: 'operation',

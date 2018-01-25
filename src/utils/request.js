@@ -6,8 +6,17 @@ import lodash from 'lodash'
 import pathToRegexp from 'path-to-regexp'
 import { message } from 'antd'
 import { YQL, CORS } from './config'
+if(process.env.argv){
+  console.log(process.env.argv)
+}
 
-axios.defaults.baseURL = '/'
+if (process.env.NODE_ENV === 'production') {
+  axios.defaults.baseURL = '/'
+} else if (process.env.NODE_ENV === 'development') {
+  axios.defaults.baseURL = 'http://localhost:5001/'
+} else {
+  axios.defaults.baseURL = '/'
+}
 
 axios.interceptors.request.use((config) => {
   // Do something before request is sent

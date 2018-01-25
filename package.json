@@ -56,9 +56,11 @@
   },
   "pre-commit": ["lint"],
   "scripts": {
-    "dev": "cross-env BROWSER=none HOST=0.0.0.0 roadhog server",
+    "dev": "cross-env BROWSER=none HOST=0.0.0.0 NODE_ENV=development roadhog server",
+    "prod": "cross-env BROWSER=none HOST=0.0.0.0 NODE_ENV=production roadhog server",
     "lint": "eslint --fix --ext .js src",
-    "build": "roadhog build",
+    "build": "cross-env NODE_ENV=production roadhog build",
+    "build:dev": "cross-env NODE_ENV=development roadhog build",
     "build:dll": "roadhog buildDll",
     "build:new": "node version && roadhog build"
   }
