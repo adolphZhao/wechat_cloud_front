@@ -32,6 +32,10 @@ const Routers = function ({ history, app }) {
       path: '/wechat-public-settings',
       models: () => [import('./models/wechatpublic')],
       component: () => import('./routes/wechatpublic'),
+    },{
+      path: '/interface-settings',
+      models: () => [import('./models/interfaceSettings')],
+      component: () => import('./routes/interfaceSettings'),
     }
   ]
 

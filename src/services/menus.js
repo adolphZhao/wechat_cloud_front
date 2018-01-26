@@ -5,20 +5,6 @@ export async function query () {
       name: '全局监测',
       route: '/summary',
     },
-    // {
-    //   id: 70,
-    //   bpid: 7,
-    //   mpid: -1,
-    //   name: ':id',
-    //   route: '/dashboard/report/:id',
-    // },
-    // {
-    //   id: 71,
-    //   bpid: 7,
-    //   mpid: -1,
-    //   name: ':id',
-    //   route: '/demo/report/:id',
-    // },
     {
       id: 2,
       name: '视频配置',
@@ -31,14 +17,14 @@ export async function query () {
     },
     {
       id: 3,
-      name: '接口配置',
+      name: '微信配置',
       route: '/wechat-public-settings',
     },
-    // {
-    //   id: 4,
-    //   name: 'SPU',
-    //   route: '/spu',
-    // },
+    {
+      id: 5,
+      name: '接口配置',
+      route: '/interface-settings',
+    },
     // {
     //   id: 101,
     //   bpid: 1,

@@ -30,6 +30,9 @@ module.exports = {
     summary: `${APIV1}/summary`,
     summaryOption: `${APIV1}/summary/:id`,
 
+    pageSettings: `${APIV1}/page-settings`,
+    pageSettingsOption: `${APIV1}/page-settings/:id`,
+
     menus: `${APIV1}/menus`,
   },
 }
