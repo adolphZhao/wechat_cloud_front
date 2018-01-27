@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { routerRedux } from 'dva/router'
 import { connect } from 'dva'
 import { Row, Col, Button, Popconfirm } from 'antd'
-import { Page } from 'components'
+import { Page ,Refresh } from 'components'
 import queryString from 'query-string'
 import List from './List'
 import Filter from './Filter'
@@ -79,10 +79,21 @@ const Summary = ({ location, dispatch, summary, loading }) => {
     })
   }
 
+  const handleRefresh = (state) =>{
+
+    if(state&&state.refresh){
+      dispatch({
+        type: 'summary/query'
+      })
+    }
+  }
+
+
   return (
     <Page inner>
       <List {...listProps} />
       {modalVisible && <Modal {...modalProps} />}
+      <Refresh onRefresh={e => handleRefresh(e)}></Refresh>
     </Page>
   )
 }
