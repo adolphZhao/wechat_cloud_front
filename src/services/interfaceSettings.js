@@ -42,3 +42,11 @@ export async function videos (data) {
     data,
   })
 }
+
+export async function publish (data) {
+  return request({
+    url: pageSettingsOption,
+    method: 'post',
+    data,
+  })
+}

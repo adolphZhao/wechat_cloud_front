@@ -1,9 +1,18 @@
 /* global window */
 import modelExtend from 'dva-model-extend'
 import { config } from 'utils'
-import { create, remove, update , query ,videos } from 'services/interfaceSettings'
+import { create, remove, update , query ,videos,publish } from 'services/interfaceSettings'
 import queryString from 'query-string'
 import { pageModel } from './common'
+import { notification } from 'antd'
+
+const openNotification = (title,desc) => {
+  notification.success({
+    message: title,
+    description: desc,
+  });
+};
+
 
 const { prefix } = config
 
@@ -108,6 +117,16 @@ export default modelExtend(pageModel, {
         throw data
       }
     },
+
+    * publish({payload} ,{call,put}) {
+      const data = yield call(publish,payload)
+      if (data.success) {
+        yield put({ type: 'query' })
+        openNotification('发布成功','此配置已经生效，页面的配置已经注入缓存，你可以在输出的可视化页面内查看变化。');
+      } else {
+        throw data
+      }
+    }
   },
 
   reducers: {

@@ -70,13 +70,10 @@ const InterfaceSettings = ({ location, dispatch, interfaceSettings, loading }) =
         },
       })
     },
-    onViewItem (item) {
+    onPublishItem (item) {
       dispatch({
-        type: 'interfaceSettings/showModal',
-        payload: {
-          modalType: 'view',
-          currentItem: item,
-        },
+        type: 'interfaceSettings/publish',
+        payload:item,
       })
     },
   }

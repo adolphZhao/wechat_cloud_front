@@ -10,7 +10,7 @@ import styles from './List.less'
 
 const confirm = Modal.confirm
 
-const List = ({ onDeleteItem, onEditItem, onViewItem,isMotion, location, ...tableProps }) => {
+const List = ({ onDeleteItem, onEditItem, onPublishItem,isMotion, location, ...tableProps }) => {
   location.query = queryString.parse(location.search)
 
   const handleMenuClick = (record, e) => {
@@ -24,12 +24,7 @@ const List = ({ onDeleteItem, onEditItem, onViewItem,isMotion, location, ...tabl
         },
       })
     } else if (e.key === '3') {
-     confirm({
-       title: '这个功能还没做！！！',
-       onOk () {
-
-       },
-     })
+     onPublishItem(record)
    }
   }
 
@@ -88,8 +83,13 @@ const List = ({ onDeleteItem, onEditItem, onViewItem,isMotion, location, ...tabl
       dataIndex: 'share_times',
       key: 'share_times',
       width: 30,
-    }
-    ,{
+    },{
+      title: '发布',
+      dataIndex: 'published',
+      key: 'published',
+      width: 30,
+      render:(v)=>v?<Icon type="play-circle" style= {{color:'#08c'}} />:<Icon type="cross" />
+    },{
       title: '配置',
       key: 'operation',
       width: 100,
@@ -126,7 +126,7 @@ const List = ({ onDeleteItem, onEditItem, onViewItem,isMotion, location, ...tabl
 List.propTypes = {
   onDeleteItem: PropTypes.func,
   onEditItem: PropTypes.func,
-  onViewItem:PropTypes.func,
+  onPublishItem:PropTypes.func,
   isMotion: PropTypes.bool,
   location: PropTypes.object,
 }
