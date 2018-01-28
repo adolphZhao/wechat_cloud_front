@@ -90,6 +90,11 @@ const List = ({ onDeleteItem, onEditItem, onPublishItem,isMotion, location, ...t
       width: 30,
       render:(v)=>v?<Icon type="play-circle" style= {{color:'#08c'}} />:<Icon type="cross" />
     },{
+      title: '举报地址',
+      dataIndex: 'report',
+      key: 'report',
+      width: 120,
+    },{
       title: '配置',
       key: 'operation',
       width: 100,

@@ -112,6 +112,18 @@ const modal = ({
               <InputNumber  min={0} max={6} />
           )}
         </FormItem>
+        <FormItem label="举报地址" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('report', {
+            initialValue: item.report ,
+            rules: [
+              {
+                required: true,
+              },
+            ],
+          })(
+              <Input />
+          )}
+        </FormItem>
       </Form>
     </Modal>
   )
