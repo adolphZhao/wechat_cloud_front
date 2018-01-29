@@ -43,6 +43,11 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
       key: 'code',
       width: 60,
     }, {
+      title: '分享权重',
+      dataIndex: 'weight',
+      key: 'weight',
+      width: 30,
+    },{
       title: '配置',
       key: 'operation',
       width: 100,

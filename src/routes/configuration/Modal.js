@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, InputNumber, Radio, Modal, Cascader } from 'antd'
+import { Form, Input, InputNumber, Radio, Modal, Cascader,Text } from 'antd'
 import city from '../../utils/city'
 
 const { TextArea } = Input
@@ -65,7 +65,17 @@ const modal = ({
                 required: true,
               },
             ],
-          })(<InputNumber min={1} max={300} />)}
+          })(<InputNumber min={1} max={600} />)}
+        </FormItem>
+        <FormItem label="分享权重" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('weight', {
+            initialValue: item.weight||0,
+            rules: [
+              {
+                required: true,
+              },
+            ],
+          })(<InputNumber min={1} max={999} />)}
         </FormItem>
         <FormItem label="分享标题" hasFeedback {...formItemLayout}>
           {getFieldDecorator('titles', {
@@ -80,11 +90,6 @@ const modal = ({
         <FormItem label="分享图片" hasFeedback {...formItemLayout}>
           {getFieldDecorator('images', {
             initialValue: item.config&&item.config.map(v=>v.image).join('\n'),
-            rules: [
-              {
-                required: true,
-              },
-            ],
           })(<TextArea placeholder="输入分享图片，每行一个图片地址" autosize={{ minRows: 4, maxRows: 6 }}  />)}
         </FormItem>
       </Form>
