@@ -53,10 +53,10 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
         : '正常'}</span>),
     }, {
       title: '预览',
-      dataIndex: 'domain',
+      dataIndex: 'url',
       key: 'url',
       width: 60,
-      render: (text,record) => <Popover placement="right" content={<img src={record.imgdata} />} ><Link to={`http://${text}/vod.xhtml`}  target="_blank">查看</Link></Popover>,
+      render: (text,record) => <Popover placement="right" content={<img src={record.imgdata} />} ><Link to={text}  target="_blank">查看</Link></Popover>,
     }, {
       title: '配置',
       key: 'operation',
