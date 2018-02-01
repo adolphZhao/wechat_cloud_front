@@ -44,11 +44,6 @@ const List = ({ onDeleteItem, onEditItem, onPublishItem,isMotion, location, ...t
       key: 'description',
       width: 120,
     },{
-      title: '视频ID',
-      dataIndex: 'video_id',
-      key: 'video_id',
-      width: 30,
-    },{
       title: '顶部广告',
       dataIndex: 'ad_top_show',
       key: 'ad_top_show',

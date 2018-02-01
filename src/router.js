@@ -36,6 +36,10 @@ const Routers = function ({ history, app }) {
       path: '/interface-settings',
       models: () => [import('./models/interfaceSettings')],
       component: () => import('./routes/interfaceSettings'),
+    },{
+      path: '/title-generator',
+      models: () => [import('./models/titleGenerator')],
+      component: () => import('./routes/titleGenerator'),
     }
   ]
 

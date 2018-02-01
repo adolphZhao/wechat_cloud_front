@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Modal } from 'antd'
+import { Table, Modal ,Icon} from 'antd'
 import classnames from 'classnames'
 import { DropOption } from 'components'
 import { Link } from 'react-router-dom'
@@ -8,9 +8,10 @@ import queryString from 'query-string'
 import AnimTableBody from 'components/DataTable/AnimTableBody'
 import styles from './List.less'
 
+const { Column } = Table;
 const confirm = Modal.confirm
 
-const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) => {
+const List = ({ onDeleteItem, onEditItem, onPublishItem,isMotion, location, ...tableProps }) => {
   location.query = queryString.parse(location.search)
 
   const handleMenuClick = (record, e) => {
@@ -23,51 +24,40 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
           onDeleteItem(record.id)
         },
       })
-    }
+    } else if (e.key === '3') {
+     onPublishItem(record)
+   }
+  }
+
+  const handleViewClick=(record,e)=>{
+    onViewItem(record)
   }
 
   const columns = [
     {
-      title: '参数ID',
+      title: '配置ID',
       dataIndex: 'id',
       key: 'id',
       width: 30,
     },{
-      title: '标题',
-      dataIndex: 'title',
-      key: 'title',
-      width: 60,
+      title: '视频ID',
+      dataIndex: 'video_id',
+      key: 'video_id',
+      width: 30,
     },{
-      title: '图片',
-      dataIndex: 'image',
-      key: 'image',
-      width: 160,
-    }, {
-      title: '地址',
-      dataIndex: 'url',
-      key: 'url',
-      width: 160,
-    }, {
-      title: '位置', //上，下，原文，返回，作者
-      dataIndex: 'position',
-      key: 'position',
-      width: 40,
-      render: (text) => {switch(text){
-        case 1:
-          return '顶部广告';
-        case 2:
-          return '底部广告';
-        case 3:
-          return '作者链接';
-        case 4:
-          return '返回链接';
-        default:
-          return <span style={{color:'#ff0000'}}>位置错误</span>
-        }}
-    }, {
+      title: '视频编码',
+      dataIndex: 'video_code',
+      key: 'video_code',
+      width: 30,
+    },{
+      title: '标题模板',
+      dataIndex: 'template',
+      key: 'template',
+      width: 30,
+    },{
       title: '配置',
       key: 'operation',
-      width: 40,
+      width: 100,
       render: (text, record) => {
         return <DropOption onMenuClick={e => handleMenuClick(record, e)} menuOptions={[{ key: '1', name: '修改' }, { key: '2', name: '删除' }]} />
       },
@@ -81,6 +71,12 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
 
   const getBodyWrapper = (body) => { return isMotion ? <AnimTableBody {...getBodyWrapperProps} body={body} /> : body }
 
+const expandedOneRowRender = (record)=>{
+   return <p style={{textAlign:'left'}}>
+            <span>前缀：{record.prefix}</span>
+            <span>核心词：{record.core}</span>
+            <span>后缀：{record.suffix}</span>
+        </p>}
   return (
     <div>
       <Table
@@ -90,6 +86,7 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
         scroll={{ x: 1250 }}
         columns={columns}
         simple
+        expandedRowRender={expandedOneRowRender}
         rowKey={record => record.id}
         getBodyWrapper={getBodyWrapper}
       />
@@ -100,6 +97,7 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
 List.propTypes = {
   onDeleteItem: PropTypes.func,
   onEditItem: PropTypes.func,
+  onPublishItem:PropTypes.func,
   isMotion: PropTypes.bool,
   location: PropTypes.object,
 }

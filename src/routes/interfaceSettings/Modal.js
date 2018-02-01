@@ -54,26 +54,6 @@ const modal = ({
             initialValue: item.description,
           })(<Input />)}
         </FormItem>
-        <FormItem label="视频" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('video_id', {
-            initialValue: item.video_id&&item.video_id.toString(),
-            rules: [
-              {
-                required: true,
-              },
-            ],
-          })(
-            <Select
-             showSearch
-             style={{ width: 200 }}
-             placeholder="选择一个视频"
-             optionFilterProp="children"
-             filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-           >
-             {item.videos&&item.videos.map(v=> <Select.Option key={v.code} value={v.id.toString()} >{v.code}</Select.Option>)}
-           </Select>
-          )}
-        </FormItem>
         <FormItem label="视频顶部广告" hasFeedback {...formItemLayout}>
           {getFieldDecorator('ad_top_show', {
               initialValue: item.ad_top_show,

@@ -21,6 +21,9 @@ module.exports = {
     video: `${APIV1}/video`,
     videoOption: `${APIV1}/video/:id`,
 
+    videoTemplate: `${APIV1}/video-template`,
+    videoTemplateOption: `${APIV1}/video-template/:id`,
+
     settings:`${APIV1}/settings`,
     settingsOption:`${APIV1}/settings/:id`,
 

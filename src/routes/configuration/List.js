@@ -33,6 +33,11 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
       key: 'id',
       width: 30,
     },{
+      title: '映射ID',
+      dataIndex: 'map_id',
+      key: 'map_id',
+      width: 30,
+    },{
       title: '分享时间',
       dataIndex: 'stop_time',
       key: 'stop_time',
@@ -48,9 +53,14 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
       key: 'weight',
       width: 30,
     },{
+      title: '标题模板',
+      dataIndex: 'template',
+      key: 'template',
+      width: 160,
+    },{
       title: '配置',
       key: 'operation',
-      width: 100,
+      width: 40,
       render: (text, record) => {
         return <DropOption onMenuClick={e => handleMenuClick(record, e)} menuOptions={[{ key: '1', name: '修改' }, { key: '2', name: '删除' }]} />
       },
@@ -64,8 +74,6 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
 
   const getBodyWrapper = (body) => { return isMotion ? <AnimTableBody {...getBodyWrapperProps} body={body} /> : body }
 
-  const expandedOneRowRender = (record)=>{ return  record.config.map(cfg=><p key={cfg.id} style={{textAlign: 'left'}}><span style={{width:400,display:'inline-block'}} title = {cfg.title}>{cfg.title.substr(0,25)+'...'}</span><span title = {cfg.image}>{cfg.image.substr(0,25)+'...'}</span></p>)}
-
   return (
     <div>
       <Table
@@ -74,7 +82,6 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
         bordered
         scroll={{ x: 1250 }}
         columns={columns}
-        expandedRowRender={expandedOneRowRender}
         rowKey={record => record.id}
         getBodyWrapper={getBodyWrapper}
       />

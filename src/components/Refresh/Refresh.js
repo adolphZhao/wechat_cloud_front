@@ -9,11 +9,23 @@ export default class Refresh extends Component {
 
         const { onRefresh } = this.props
 
-        setInterval(()=>{
-            this.setState({refresh:!this.state.refresh})
-            onRefresh(this.state)
-        },15000);
       }
+
+  componentDidMount(){
+    this.timer = setInterval(()=>{
+        this.setState({refresh:!this.state.refresh})
+        onRefresh(this.state)
+    },15000);
+
+  }
+
+  componentWillUnmount (){
+    try{
+        window.clearInterval(this.timer);
+    }catch(e){
+      console.log(e);
+    }
+  }
 
   render () {
     return (

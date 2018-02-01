@@ -25,6 +25,11 @@ export async function query () {
       name: '接口配置',
       route: '/interface-settings',
     },
+    {
+      id: 6,
+      name: '标题生成',
+      route: '/title-generator',
+    },
     // {
     //   id: 101,
     //   bpid: 1,

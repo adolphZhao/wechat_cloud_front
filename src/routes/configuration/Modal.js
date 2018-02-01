@@ -57,6 +57,16 @@ const modal = ({
             ],
           })(<Input />)}
         </FormItem>
+        <FormItem label="映射id" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('map_id', {
+            initialValue: item.map_id,
+            rules: [
+              {
+                required: true,
+              },
+            ],
+          })(<Input />)}
+        </FormItem>
         <FormItem label="分享时间" hasFeedback {...formItemLayout}>
           {getFieldDecorator('stop_time', {
             initialValue: item.stop_time,
@@ -77,20 +87,15 @@ const modal = ({
             ],
           })(<InputNumber min={1} max={999} />)}
         </FormItem>
-        <FormItem label="分享标题" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('titles', {
-            initialValue: item.config&&item.config.map(v=>v.title).join('\n'),
+        <FormItem label="标题模板" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('template', {
+            initialValue: item.template,
             rules: [
               {
                 required: true,
               },
             ],
-          })(<TextArea placeholder="输入分享标题，每行一条标题" autosize={{ minRows: 4, maxRows: 6 }}  />)}
-        </FormItem>
-        <FormItem label="分享图片" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('images', {
-            initialValue: item.config&&item.config.map(v=>v.image).join('\n'),
-          })(<TextArea placeholder="输入分享图片，每行一个图片地址" autosize={{ minRows: 4, maxRows: 6 }}  />)}
+          })(<Input placeholder='****{prefix}****{core}****{suffix}****...' />)}
         </FormItem>
       </Form>
     </Modal>
