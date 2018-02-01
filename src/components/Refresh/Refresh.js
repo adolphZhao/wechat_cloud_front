@@ -4,19 +4,16 @@ import PropTypes from 'prop-types'
 export default class Refresh extends Component {
   constructor(props) {
         super(props);
-
         this.state = {refresh:true};
-
-        const { onRefresh } = this.props
-
       }
 
   componentDidMount(){
+    const { onRefresh } = this.props
     this.timer = setInterval(()=>{
         this.setState({refresh:!this.state.refresh})
         onRefresh(this.state)
     },15000);
-
+    console.log('componentDidMount');
   }
 
   componentWillUnmount (){
@@ -25,6 +22,7 @@ export default class Refresh extends Component {
     }catch(e){
       console.log(e);
     }
+    console.log('componentWillUnmount');
   }
 
   render () {
