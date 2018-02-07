@@ -17,12 +17,7 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
     if (e.key === '1') {
       onEditItem(record)
     } else if (e.key === '2') {
-      confirm({
-        title: '功能还没开发！！！',
-        onOk () {
-            //onDeleteItem(record.id)
-        },
-      })
+      onDeleteItem(record.id)
     }
   }
 
@@ -45,10 +40,10 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
       width: 60,
     }, {
       title: '状态',
-      dataIndex: 'health',
-      key: 'health',
+      dataIndex: 'status',
+      key: 'status',
       width: 60,
-      render: text => (<span style={{color:'#00ff22'}}>{text
+      render: text => (<span style={{color: text?'#ff0000':'#00ff22'}}>{text
         ? '被封'
         : '正常'}</span>),
     }, {
