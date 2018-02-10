@@ -36,6 +36,8 @@ module.exports = {
     pageSettings: `${APIV1}/page-settings`,
     pageSettingsOption: `${APIV1}/page-settings/:id`,
 
+    bindUrls: `${APIV1}/public-setting/bind`,
+
     menus: `${APIV1}/menus`,
   },
 }

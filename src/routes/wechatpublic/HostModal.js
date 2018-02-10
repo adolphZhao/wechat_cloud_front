@@ -33,8 +33,9 @@ const modal = ({
       }
       const data = {
         ...getFieldsValue(),
-        key: item.key,
+        public_id: item.id,
       }
+      console.log(item);
       onOk(data)
     })
   }
@@ -47,31 +48,16 @@ const modal = ({
   return (
     <Modal {...modalOpts}>
       <Form layout="horizontal">
-        <FormItem label="标题" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('title', {
-            initialValue: item.title,
-          })(<Input />)}
-        </FormItem>
-        <FormItem label="APPID" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('app_id', {
-            initialValue: item.app_id,
-            rules: [
-              {
-                required: true,
-              },
-            ],
-          })(<Input />)}
-        </FormItem>
-        <FormItem label="APPSECRET" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('app_secret', {
-            initialValue: item.app_secret,
-            rules: [
-              {
-                required: true,
-              },
-            ],
-          })(<Input />)}
-        </FormItem>
+      <FormItem label="绑定URL" hasFeedback {...formItemLayout}>
+        {getFieldDecorator('bind_url', {
+          initialValue: '',
+          rules: [
+            {
+              required: true,
+            },
+          ],
+        })(<TextArea placeholder="输入微信绑定的url，每行一个绑定的url" autosize={{ minRows: 3, maxRows: 6 }} />)}
+      </FormItem>
       </Form>
     </Modal>
   )

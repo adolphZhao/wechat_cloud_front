@@ -1,7 +1,7 @@
 /* global window */
 import modelExtend from 'dva-model-extend'
 import { config } from 'utils'
-import { create, remove, update,query } from 'services/wechatpublic'
+import { create, remove, update,query,createBindUrls } from 'services/wechatpublic'
 import queryString from 'query-string'
 import { pageModel } from './common'
 
@@ -13,6 +13,7 @@ export default modelExtend(pageModel, {
   state: {
     currentItem: {},
     modalVisible: false,
+    hostModalVisible: false,
     modalType: 'create',
     selectedRowKeys: [],
     isMotion: window.localStorage.getItem(`${prefix}userIsMotion`) === 'true',
@@ -94,7 +95,15 @@ export default modelExtend(pageModel, {
         throw data
       }
     },
-
+    * createBindUrls ({ payload }, { call, put }) {
+      const data = yield call(createBindUrls, payload)
+      if (data.success) {
+        yield put({ type: 'hideHostModal' })
+        yield put({ type: 'query' })
+      } else {
+        throw data
+      }
+    },
   },
 
   reducers: {
@@ -105,6 +114,14 @@ export default modelExtend(pageModel, {
 
     hideModal (state) {
       return { ...state, modalVisible: false }
+    },
+
+    showHostModal (state, { payload }) {
+      return { ...state, ...payload, hostModalVisible: true }
+    },
+
+    hideHostModal (state) {
+      return { ...state, hostModalVisible: false }
     },
 
     switchIsMotion (state) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Modal } from 'antd'
+import { Table, Modal ,Tag} from 'antd'
 import classnames from 'classnames'
 import { DropOption } from 'components'
 import { Link } from 'react-router-dom'
@@ -10,7 +10,7 @@ import styles from './List.less'
 
 const confirm = Modal.confirm
 
-const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) => {
+const List = ({ onDeleteItem, onEditItem,onBindUrl,onHostDelete, isMotion, location, ...tableProps }) => {
   location.query = queryString.parse(location.search)
 
   const handleMenuClick = (record, e) => {
@@ -23,6 +23,8 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
           onDeleteItem(record.id)
         },
       })
+    }else if (e.key === '3') {
+      onBindUrl(record)
     }
   }
 
@@ -47,7 +49,7 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
       key: 'operation',
       width: 100,
       render: (text, record) => {
-        return <DropOption onMenuClick={e => handleMenuClick(record, e)} menuOptions={[{ key: '1', name: '修改' }, { key: '2', name: '删除' }]} />
+        return <DropOption onMenuClick={e => handleMenuClick(record, e)} menuOptions={[{ key: '3', name: '绑定域名' },{ key: '1', name: '修改' }, { key: '2', name: '删除' }]} />
       },
     },
   ]
@@ -59,7 +61,7 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
 
   const getBodyWrapper = (body) => { return isMotion ? <AnimTableBody {...getBodyWrapperProps} body={body} /> : body }
 
-  const expandedOneRowRender = (record)=>{ return  record.config&&record.config.map(cfg=><p key={cfg.id} style={{textAlign: 'left'}}>{cfg.hosts}</p>)}
+  const expandedOneRowRender = (record)=>{ return  record.config&&record.config.map(cfg=><Tag style={{display:'block',margin:'3px'}} key={cfg.id} >{cfg.hosts}</Tag>)}
 
   return (
     <div>

@@ -8,12 +8,13 @@ import queryString from 'query-string'
 import List from './List'
 import Filter from './Filter'
 import Modal from './Modal'
+import HostModal from './HostModal'
 
 
 const Wechatpublic = ({ location, dispatch, wechatpublic, loading }) => {
   location.query = queryString.parse(location.search)
 
-  const { list, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys } = wechatpublic
+  const { list, pagination, currentItem,hostModalVisible, modalVisible, modalType, isMotion, selectedRowKeys } = wechatpublic
   const { pageSize } = pagination
 
   const modalProps = {
@@ -32,6 +33,25 @@ const Wechatpublic = ({ location, dispatch, wechatpublic, loading }) => {
     onCancel () {
       dispatch({
         type: 'wechatpublic/hideModal',
+      })
+    },
+  }
+
+  const hostModalProps = {
+    item:  currentItem,
+    visible: hostModalVisible,
+    maskClosable: false,
+    title:  '创建微信绑定域名',
+    wrapClassName: 'vertical-center-modal',
+    onOk (data) {
+      dispatch({
+        type: `wechatpublic/createBindUrls`,
+        payload: data,
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'wechatpublic/hideHostModal',
       })
     },
   }
@@ -68,6 +88,21 @@ const Wechatpublic = ({ location, dispatch, wechatpublic, loading }) => {
         },
       })
     },
+    onBindUrl (item) {
+      dispatch({
+        type: 'wechatpublic/showHostModal',
+        payload: {
+          currentItem: item,
+        },
+      })
+    },
+    onHostDelete (id) {
+      dispatch({
+        type: 'wechatpublic/deleteHost',
+        payload: id,
+      })
+    },
+
   }
 
   const filterProps = {
@@ -123,6 +158,7 @@ const Wechatpublic = ({ location, dispatch, wechatpublic, loading }) => {
       <Filter {...filterProps} />
       <List {...listProps} />
       {modalVisible && <Modal {...modalProps} />}
+      {hostModalVisible && <HostModal {...hostModalProps} />}
     </Page>
   )
 }
