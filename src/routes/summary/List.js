@@ -21,12 +21,16 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
     }
   }
 
+  // const {dataSource} = tableProps;
+  // tableProps.dataSource = dataSource.filter(v=>v.deleted ==0);
+
   const columns = [
     {
       title: '入口地址',
       dataIndex: 'domain',
       key: 'domain',
       width: 120,
+      render: (text,record)=> (<span >{text+(record.ip_address?'('+record.ip_address+')':'')} </span>)
     }, {
       title: '导流设置',
       dataIndex: 'guide',

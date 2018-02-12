@@ -5,6 +5,7 @@ import city from '../../utils/city'
 
 const FormItem = Form.Item
 
+const {TextArea} = Input
 const formItemLayout = {
   labelCol: {
     span: 6,
@@ -41,33 +42,52 @@ const modal = ({
     ...modalProps,
     onOk: handleOk,
   }
+  const ipaddress =item.list.filter((v)=>{
+    if(v.status==0){
+      return true;
+    }
+  }).map(v=>"'"+v.ip_address+"'").join(',');
 
+if(item.type=='ipaddress'){
   return (
     <Modal {...modalOpts}>
       <Form layout="horizontal">
-        <FormItem label="导流域名" hasFeedback {...formItemLayout}>
+        <FormItem label="统计负载IP" hasFeedback {...formItemLayout}>
           {getFieldDecorator('guide', {
-            initialValue: item.guide,
-            rules: [
-              {
-                required: true,
-              },
-            ],
-          })(<Input />)}
-        </FormItem>
-        <FormItem label="导流比例（‰）" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('percent', {
-            initialValue: item.percent,
-            rules: [
-              {
-                required: true,
-              },
-            ],
-          })(<InputNumber  min={0} max={1000} />)}
+            initialValue:  "angular.forEach(angular.element('.table-hover').scope().store, function(row){row.selected = [" + ipaddress + "].indexOf(row.Address) == -1;})",
+          })(<TextArea autosize={{minRows:6,maxRows:6}}/>)}
         </FormItem>
       </Form>
     </Modal>
   )
+}
+return (
+  <Modal {...modalOpts}>
+    <Form layout="horizontal">
+      <FormItem label="导流域名" hasFeedback {...formItemLayout}>
+        {getFieldDecorator('guide', {
+          initialValue: item.guide,
+          rules: [
+            {
+              required: true,
+            },
+          ],
+        })(<Input />)}
+      </FormItem>
+      <FormItem label="导流比例（‰）" hasFeedback {...formItemLayout}>
+        {getFieldDecorator('percent', {
+          initialValue: item.percent,
+          rules: [
+            {
+              required: true,
+            },
+          ],
+        })(<InputNumber  min={0} max={1000} />)}
+      </FormItem>
+    </Form>
+  </Modal>
+)
+
 }
 
 modal.propTypes = {

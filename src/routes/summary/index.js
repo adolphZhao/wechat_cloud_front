@@ -17,16 +17,15 @@ const Summary = ({ location, dispatch, summary, loading }) => {
   const { pageSize } = pagination
 
   const modalProps = {
-    item: modalType === 'create' ? {} : currentItem,
+    item: modalType === 'create' ? {'type':'ipaddress','list':list} : currentItem,
     visible: modalVisible,
     maskClosable: false,
     confirmLoading: loading.effects['summary/update'],
-    title: `${modalType === 'create' ? '设置导流' : '设置导流'}`,
+    title: `${modalType === 'create' ? '统计负载IP' : '设置导流'}`,
     wrapClassName: 'vertical-center-modal',
     onOk (data) {
       dispatch({
-        type: `summary/${modalType}`,
-        payload: data,
+        type: 'summary/hideModal',
       })
     },
     onCancel () {
@@ -88,9 +87,48 @@ const Summary = ({ location, dispatch, summary, loading }) => {
     }
   }
 
+  const filterProps = {
+    isMotion,
+    filter: {
+      ...location.query,
+    },
+    onFilterChange (value) {
+      dispatch(routerRedux.push({
+        pathname: location.pathname,
+        search: queryString.stringify({
+          ...value,
+          page: 1,
+          pageSize,
+        }),
+      }))
+    },
+    onSearch (fieldsValue) {
+      fieldsValue.keyword.length ? dispatch(routerRedux.push({
+        pathname: '/wechat-public-settings',
+        search: queryString.stringify({
+          field: fieldsValue.field,
+          keyword: fieldsValue.keyword,
+        }),
+      })) : dispatch(routerRedux.push({
+        pathname: '/wechat-public-settings',
+      }))
+    },
+    onAdd () {
+      dispatch({
+        type: 'summary/showModal',
+        payload: {
+          modalType: 'create',
+        },
+      })
+    },
+    switchIsMotion () {
+      dispatch({ type: 'wechatpublic/switchIsMotion' })
+    },
+  }
 
   return (
     <Page inner>
+      <Filter {...filterProps} />
       <List {...listProps} />
       {modalVisible && <Modal {...modalProps} />}
       <Refresh onRefresh={e => handleRefresh(e)}></Refresh>

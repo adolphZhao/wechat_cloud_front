@@ -63,6 +63,15 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
       key: 'views',
       width: 30,
     },{
+      title: '增长率',
+      dataIndex: 'yesterday',
+      key: 'yesterday',
+      width: 30,
+      render:(text,record)=>{
+        text = (text==0?1:text);
+        return  Math.round((record.views-text)/text*10000)/100+'%'
+      }
+    },{
       title: '配置',
       key: 'operation',
       width: 40,

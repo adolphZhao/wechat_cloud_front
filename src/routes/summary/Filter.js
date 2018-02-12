@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import { FilterItem } from 'components'
-import { Form, Button, Row, Col, DatePicker, Input, Cascader, Switch } from 'antd'
+import { Form, Button, Row, Col, DatePicker, Input, Cascader, Switch , Popover } from 'antd'
 import city from '../../utils/city'
 
 const Search = Input.Search
@@ -77,14 +77,24 @@ const Filter = ({
   if (filter.createTime && filter.createTime[1]) {
     initialCreateTime[1] = moment(filter.createTime[1])
   }
+  // const content = ()=>{ var output = [];
+  //   for (var entry of this.dataSet.domain) {
+  //       output.push(entry);
+  //   }
+  //
+  //   output = _.uniq(output);
+  //   var text = "['" + output.join("','") + "']";
+  //
+  //   return "angular.forEach(angular.element('.table-hover').scope().store, function(row){row.selected = " + text + ".indexOf(row.Address) == -1;})</p>");
+  // }
 
   return (
     <Row gutter={24}>
       <Col  span= {21}></Col>
       <Col span={3} >
         <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-          <div>
-            <Button size="large" type="ghost" onClick={onAdd}>Create</Button>
+          <div style={{padding:10}}>
+            <Button size="large" type="ghost" onClick={onAdd}>统计负载IP</Button>
           </div>
         </div>
       </Col>
