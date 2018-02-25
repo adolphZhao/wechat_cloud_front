@@ -72,7 +72,7 @@ export default {
           })
         }
         if (location.href.includes('/login')) {
-          yield put(routerRedux.push('/summary'))
+          yield put(routerRedux.push('/summary-view'))
         }
       } else if (config.openPages && config.openPages.indexOf(location.pathname) < 0) {
         window.location = `${location.origin}/login`

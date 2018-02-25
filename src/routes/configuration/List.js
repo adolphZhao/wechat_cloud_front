@@ -68,7 +68,10 @@ const List = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) =
       key: 'yesterday',
       width: 30,
       render:(text,record)=>{
-        text = (text==0?1:text);
+        if(text==0)
+        {
+          return '0%';
+        }
         return  Math.round((record.views-text)/text*10000)/100+'%'
       }
     },{

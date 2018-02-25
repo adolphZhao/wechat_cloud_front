@@ -1,14 +1,14 @@
 /* global window */
 import modelExtend from 'dva-model-extend'
 import { config } from 'utils'
-import { create, remove, update ,query } from 'services/summary'
+import { create, remove, update ,query } from 'services/summaryView'
 import queryString from 'query-string'
 import { pageModel } from './common'
 
 const { prefix } = config
 
 export default modelExtend(pageModel, {
-  namespace: 'summary',
+  namespace: 'summaryView',
 
   state: {
     currentItem: {},
@@ -53,7 +53,7 @@ export default modelExtend(pageModel, {
 
     * delete ({ payload }, { call, put, select }) {
       const data = yield call(remove, { id: payload })
-      const { selectedRowKeys } = yield select(_ => _.summary)
+      const { selectedRowKeys } = yield select(_ => _.summaryView)
       if (data.success) {
         yield put({ type: 'updateState', payload: { selectedRowKeys: selectedRowKeys.filter(_ => _ !== payload) } })
         yield put({ type: 'query' })

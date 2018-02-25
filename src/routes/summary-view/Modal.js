@@ -48,7 +48,7 @@ const modal = ({
     }
   }).map(v=>"'"+v.ip_address+"'").join(',');
 
-if(item.type=='ipaddress'){
+
   return (
     <Modal {...modalOpts}>
       <Form layout="horizontal">
@@ -61,34 +61,7 @@ if(item.type=='ipaddress'){
     </Modal>
   )
 }
-return (
-  <Modal {...modalOpts}>
-    <Form layout="horizontal">
-      <FormItem label="导流域名" hasFeedback {...formItemLayout}>
-        {getFieldDecorator('guide', {
-          initialValue: item.guide,
-          rules: [
-            {
-              required: true,
-            },
-          ],
-        })(<Input />)}
-      </FormItem>
-      <FormItem label="导流比例（‰）" hasFeedback {...formItemLayout}>
-        {getFieldDecorator('percent', {
-          initialValue: item.percent,
-          rules: [
-            {
-              required: true,
-            },
-          ],
-        })(<InputNumber  min={0} max={1000} />)}
-      </FormItem>
-    </Form>
-  </Modal>
-)
 
-}
 
 modal.propTypes = {
   form: PropTypes.object.isRequired,

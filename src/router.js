@@ -18,8 +18,12 @@ const Routers = function ({ history, app }) {
       component: () => import('./routes/login/'),
     },{
       path: '/summary',
-      models: () => [import('./models/summary')],
-      component: () => import('./routes/summary/'),
+      models: () => [import('./models/summaryView')],
+      component: () => import('./routes/summary-view/'),
+    },{
+      path: '/summary-view',
+      models: () => [import('./models/summaryView')],
+      component: () => import('./routes/summary-view/'),
     }, {
       path: '/video-settings',
       models: () => [import('./models/configuration')],

@@ -13,7 +13,6 @@ export default class Refresh extends Component {
         this.setState({refresh:!this.state.refresh})
         onRefresh(this.state)
     },15000);
-    console.log('componentDidMount');
   }
 
   componentWillUnmount (){
@@ -22,13 +21,11 @@ export default class Refresh extends Component {
     }catch(e){
       console.log(e);
     }
-    console.log('componentWillUnmount');
   }
 
   render () {
     return (
-      <div>
-      </div>
+      <div></div>
     )
   }
 }

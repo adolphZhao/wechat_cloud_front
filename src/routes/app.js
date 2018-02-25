@@ -19,7 +19,7 @@ let lastHref
 
 const App = ({ children, dispatch, app, loading, location }) => {
   const { user, siderFold, darkTheme, isNavbar, menuPopoverVisible, navOpenKeys, menu } = app
-
+  
   let { pathname } = location
   pathname = pathname.startsWith('/') ? pathname : `/${pathname}`
   const { iconFontJS, iconFontCSS, logo } = config

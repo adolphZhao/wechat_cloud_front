@@ -3,7 +3,7 @@ export async function query () {
     {
       id: 1,
       name: '全局监测',
-      route: '/summary',
+      route: '/summary-view',
     },
     {
       id: 2,

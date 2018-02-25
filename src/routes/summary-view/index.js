@@ -3,64 +3,50 @@ import PropTypes from 'prop-types'
 import { routerRedux } from 'dva/router'
 import { connect } from 'dva'
 import { Row, Col, Button, Popconfirm } from 'antd'
-import { Page ,Refresh } from 'components'
+import { Page, Refresh} from 'components'
 import queryString from 'query-string'
 import List from './List'
 import Filter from './Filter'
 import Modal from './Modal'
 
 
-const Summary = ({ location, dispatch, summary, loading }) => {
+const Summary = ({ location, dispatch, summaryView, loading }) => {
   location.query = queryString.parse(location.search)
 
-  const { list, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys } = summary
+  const { list, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys } = summaryView
   const { pageSize } = pagination
 
   const modalProps = {
     item: modalType === 'create' ? {'type':'ipaddress','list':list} : currentItem,
     visible: modalVisible,
     maskClosable: false,
-    confirmLoading: loading.effects['summary/update'],
+    confirmLoading: loading.effects['summaryView/update'],
     title: `${modalType === 'create' ? '统计负载IP' : '设置导流'}`,
     wrapClassName: 'vertical-center-modal',
     onOk (data) {
       dispatch({
-        type: 'summary/hideModal',
+        type: 'summaryView/hideModal',
       })
     },
     onCancel () {
       dispatch({
-        type: 'summary/hideModal',
+        type: 'summaryView/hideModal',
       })
     },
   }
 
   const listProps = {
     dataSource: list,
-    loading: loading.effects['summary/query'],
-    pagination,
-    location,
-    isMotion,
-    onChange (page) {
-      const { query, pathname } = location
-      dispatch(routerRedux.push({
-        pathname,
-        search: queryString.stringify({
-          ...query,
-          page: page.current,
-          pageSize: page.pageSize,
-        }),
-      }))
-    },
+    loading: loading.effects['summaryView/query'],
     onDeleteItem (id) {
       dispatch({
-        type: 'summary/delete',
+        type: 'summaryView/delete',
         payload: id,
       })
     },
     onEditItem (item) {
       dispatch({
-        type: 'summary/showModal',
+        type: 'summaryView/showModal',
         payload: {
           modalType: 'update',
           currentItem: item,
@@ -71,7 +57,7 @@ const Summary = ({ location, dispatch, summary, loading }) => {
 
   const handleDeleteItems = () => {
     dispatch({
-      type: 'summary/multiDelete',
+      type: 'summaryView/multiDelete',
       payload: {
         ids: selectedRowKeys,
       },
@@ -79,10 +65,10 @@ const Summary = ({ location, dispatch, summary, loading }) => {
   }
 
   const handleRefresh = (state) =>{
-
+    console.log('refresh')
     if(state&&state.refresh){
       dispatch({
-        type: 'summary/query'
+        type: 'summaryView/query'
       })
     }
   }
@@ -90,20 +76,24 @@ const Summary = ({ location, dispatch, summary, loading }) => {
   const filterProps = {
     onAdd () {
       dispatch({
-        type: 'summary/showModal',
+        type: 'summaryView/showModal',
         payload: {
           modalType: 'create',
         },
       })
     }
   }
-//  <!--Refresh onRefresh={e => handleRefresh(e)}></Refresh-->
+/*  <!--
+
+
+
+-->*/
   return (
     <Page inner>
-      <Filter {...filterProps} />
-      <List {...listProps} />
-      {modalVisible && <Modal {...modalProps} />}
-      <Refresh onRefresh={e => handleRefresh(e)}></Refresh>
+    <Filter {...filterProps} />
+    <List {...listProps} />
+    {modalVisible && <Modal {...modalProps} />}
+    <Refresh onRefresh={e => handleRefresh(e)}></Refresh>
     </Page>
   )
 }
@@ -115,4 +105,4 @@ Summary.propTypes = {
   loading: PropTypes.object,
 }
 
-export default connect(({ summary, loading }) => ({ summary, loading }))(Summary)
+export default connect(({ summaryView, loading }) => ({ summaryView, loading }))(Summary)

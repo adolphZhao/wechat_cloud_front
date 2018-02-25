@@ -6,9 +6,6 @@ import lodash from 'lodash'
 import pathToRegexp from 'path-to-regexp'
 import { message } from 'antd'
 import { YQL, CORS } from './config'
-if(process.env.argv){
-  console.log(process.env.argv)
-}
 
 if (process.env.NODE_ENV === 'production') {
   axios.defaults.baseURL = '/'

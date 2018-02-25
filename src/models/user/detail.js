@@ -10,14 +10,7 @@ export default {
   },
 
   subscriptions: {
-    setup ({ dispatch, history }) {
-      history.listen(({ pathname }) => {
-        const match = pathToRegexp('/user/:id').exec(pathname)
-        if (match) {
-          dispatch({ type: 'query', payload: { id: match[1] } })
-        }
-      })
-    },
+    
   },
 
   effects: {

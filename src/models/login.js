@@ -23,7 +23,7 @@ export default {
         if (from) {
           yield put(routerRedux.push(from))
         } else {
-          yield put(routerRedux.push('/summary'))
+          yield put(routerRedux.push('/summary-view'))
         }
       } else {
         throw data
