@@ -34,3 +34,12 @@ export async function remove (data) {
     data,
   })
 }
+
+export async function changeGuideStatus (data) {
+  console.log(data);
+  return request({
+    url: summaryOption,
+    method: 'put',
+    data,
+  })
+}

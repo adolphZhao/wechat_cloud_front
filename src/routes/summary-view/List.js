@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Modal,Popover } from 'antd'
+import { Table, Modal,Popover,Switch } from 'antd'
 import classnames from 'classnames'
 import { DropOption } from 'components'
 //import { Link } from 'react-router-dom'
@@ -10,7 +10,7 @@ import styles from './List.less'
 
 const confirm = Modal.confirm
 
-const List = ({ onDeleteItem, onEditItem, ...tableProps }) => {
+const List = ({ onDeleteItem, onEditItem,onGuideChange, ...tableProps }) => {
 
   const handleMenuClick = (record, e) => {
     if (e.key === '1') {
@@ -45,6 +45,17 @@ const List = ({ onDeleteItem, onEditItem, ...tableProps }) => {
       render: text => (<span style={{color: text?'#ff0000':'#00ff22'}}>{text
         ? '被封'
         : '正常'}</span>),
+    }, {
+      title: '导流开关',
+      dataIndex: 'guide_status',
+      key: 'guide_status',
+      width: 60,
+      render: (text,record) =>  <Switch defaultChecked onChange={e => onGuideChange(record, e)} defaultChecked={text?true:false} />,
+    },{
+      title: '绑定时间',
+      dataIndex: 'created_at',
+      key: 'created_at',
+      width: 60,
     }, {
       title: '预览',
       dataIndex: 'url',

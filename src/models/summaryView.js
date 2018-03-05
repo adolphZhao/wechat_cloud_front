@@ -1,7 +1,7 @@
 /* global window */
 import modelExtend from 'dva-model-extend'
 import { config } from 'utils'
-import { create, remove, update ,query } from 'services/summaryView'
+import { create, remove, update ,query,changeGuideStatus } from 'services/summaryView'
 import queryString from 'query-string'
 import { pageModel } from './common'
 
@@ -94,6 +94,16 @@ export default modelExtend(pageModel, {
       }
     },
 
+    * changeGuideStatus ({ payload }, { select, call, put }) {
+  
+      const data = yield call(changeGuideStatus, payload)
+
+      if (data.success) {
+        yield put({ type: 'query' })
+      } else {
+        throw data
+      }
+    },
   },
 
   reducers: {

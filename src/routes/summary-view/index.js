@@ -53,6 +53,13 @@ const Summary = ({ location, dispatch, summaryView, loading }) => {
         },
       })
     },
+    onGuideChange(item) {
+      item.guide_status = !item.guide_status;
+      dispatch({
+        type: 'summaryView/changeGuideStatus',
+        payload: item,
+      })
+    }
   }
 
   const handleDeleteItems = () => {
