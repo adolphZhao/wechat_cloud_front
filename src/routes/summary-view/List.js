@@ -46,7 +46,7 @@ const List = ({ onDeleteItem, onEditItem,onGuideChange, ...tableProps }) => {
         ? '被封'
         : '正常'}</span>),
     }, {
-      title: '导流开关',
+      title: '标记被封',
       dataIndex: 'guide_status',
       key: 'guide_status',
       width: 60,

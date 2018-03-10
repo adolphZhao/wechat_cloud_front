@@ -59,6 +59,11 @@ const modal = ({
         <FormItem label="导流分组" hasFeedback {...formItemLayout}>
           {getFieldDecorator('domain', {
             initialValue: item.relation.map(v=>v.domain),
+            rules: [
+              {
+                required: true,
+              },
+            ]
           })(<Select
           mode="multiple"
           size='default'
@@ -72,6 +77,11 @@ const modal = ({
         <FormItem label="导流时间" hasFeedback {...formItemLayout}>
           {getFieldDecorator('guide_time', {
             initialValue: item.guide_time,
+            rules: [
+              {
+                required: true,
+              },
+            ]
           })(<Select
             size='default'
             onChange={handleChange}
