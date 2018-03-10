@@ -44,6 +44,10 @@ const Routers = function ({ history, app }) {
       path: '/title-generator',
       models: () => [import('./models/titleGenerator')],
       component: () => import('./routes/titleGenerator'),
+    },{
+      path: '/guide-settings',
+      models: () => [import('./models/guideSettings')],
+      component: () => import('./routes/guideSettings'),
     }
   ]
 

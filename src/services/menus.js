@@ -30,6 +30,11 @@ export async function query () {
       name: '标题生成',
       route: '/title-generator',
     },
+    {
+      id: 7,
+      name: '设置导流',
+      route: '/guide-settings',
+    },
     // {
     //   id: 101,
     //   bpid: 1,

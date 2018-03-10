@@ -36,6 +36,9 @@ module.exports = {
     pageSettings: `${APIV1}/page-settings`,
     pageSettingsOption: `${APIV1}/page-settings/:id`,
 
+    guideSettings: `${APIV1}/guide-settings`,
+    guideSettingsOption: `${APIV1}/guide-settings/:id`,
+
     bindUrls: `${APIV1}/public-setting/bind`,
 
     menus: `${APIV1}/menus`,
